@@ -1,5 +1,5 @@
 {
-  "name": "turborepo-basic-shared",
+  "name": "warehouse",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -10,11 +10,15 @@
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prepare": "husky install",
+    "test": "pnpm run -r test"
   },
   "devDependencies": {
+    "husky": "^7.0.0",
     "prettier": "^2.5.1",
-    "turbo": "latest"
+    "turbo": "latest",
+    "typescript": "^4.6.3"
   },
   "engines": {
     "npm": ">=7.0.0",
