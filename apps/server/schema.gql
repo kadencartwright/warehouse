@@ -1,0 +1,71 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: ID!
+
+  """the first name of the user"""
+  firstName: String!
+
+  """the last name of the user"""
+  lastName: String!
+
+  """
+  the password for the user. Must be 12-64 characters, include at least 1 number, and at least 1 special character
+  """
+  passwordHash: String!
+
+  """
+  the primary contact email of the user. This will also be the user's login username
+  """
+  email: String!
+}
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+}
+
+input CreateUserInput {
+  """the first name of the user"""
+  firstName: String!
+
+  """the last name of the user"""
+  lastName: String!
+
+  """
+  the password for the user. Must be 12-64 characters, include at least 1 number, and at least 1 special character
+  """
+  password: String!
+
+  """
+  the primary contact email of the user. This will also be the user's login username
+  """
+  email: String!
+}
+
+input UpdateUserInput {
+  """the first name of the user"""
+  firstName: String
+
+  """the last name of the user"""
+  lastName: String
+
+  """
+  the password for the user. Must be 12-64 characters, include at least 1 number, and at least 1 special character
+  """
+  password: String
+
+  """
+  the primary contact email of the user. This will also be the user's login username
+  """
+  email: String
+  id: Int!
+}
