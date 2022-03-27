@@ -6,6 +6,9 @@ import { AuthModule } from "./auth/auth.module";
 import { UsersModule } from "./users/users.module";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { TypeOrmModule } from "@nestjs/typeorm";
+import { DatabaseModule } from "./database/database.module";
+import { ConfigModule } from "@nestjs/config";
+import configuration from "./config/configuration";
 
 @Module({
   imports: [
@@ -17,15 +20,12 @@ import { TypeOrmModule } from "@nestjs/typeorm";
       playground: false,
       autoSchemaFile: "schema.gql",
     }),
-    TypeOrmModule.forRoot({
-      keepConnectionAlive: true,
-      type: "postgres",
-      host: "127.0.0.1",
-      port: 5432,
-      username: "postgres",
-      password: "postgres",
-      database: "warehouse_db",
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: ["development.env"],
+      load: [configuration],
     }),
+    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
