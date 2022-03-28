@@ -7,7 +7,7 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./",
     "baseUrl": "./",
     "incremental": true,
     "strictNullChecks": false,
@@ -15,7 +15,8 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "composite": true
+    "composite": true,
+    "types": ["jest", "node", "@types/jest", "reflect-metadata"]
   },
   "exclude": ["./dist"],
   "extends": "../../packages/tsconfig/base.json"

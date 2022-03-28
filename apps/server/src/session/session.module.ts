@@ -1,11 +1,12 @@
 import { Module } from "@nestjs/common";
 import { SessionService } from "./session.service";
 import { sessionProviders } from "./session.providers";
-import { CryptoService } from "src/crypto/crypto.service";
+import { CryptoModule } from "../crypto/crypto.module";
+import { DatabaseModule } from "../database/database.module";
 
 @Module({
-  imports: [CryptoService],
+  imports: [CryptoModule, DatabaseModule],
   providers: [SessionService, ...sessionProviders],
-  exports: [...sessionProviders],
+  exports: [...sessionProviders, SessionService],
 })
 export class SessionModule {}

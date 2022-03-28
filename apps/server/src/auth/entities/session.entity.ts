@@ -1,4 +1,4 @@
-import { User } from "src/users/entities/user.entity";
+import { User } from "../../users/entities/user.entity";
 import {
   Column,
   Entity,
@@ -12,9 +12,8 @@ export class Session {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  @JoinColumn()
-  @ManyToOne((type) => User, (user) => user.id)
+  @ManyToOne(() => User, (user) => user.sessions)
+  @JoinColumn({ name: "user_id", referencedColumnName: "id" })
   user: User;
 
   @Column({ default: "NOW()" })

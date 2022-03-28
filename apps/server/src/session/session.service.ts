@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { SESSION_REPOSITORY } from "src/constants";
-import { CryptoService } from "src/crypto/crypto.service";
-import { User } from "src/users/entities/user.entity";
+import { SESSION_REPOSITORY } from "../constants";
+import { CryptoService } from "../crypto/crypto.service";
+import { User } from "../users/entities/user.entity";
 import { Repository } from "typeorm";
 import { Session } from "./entities/session.entity";
 import { Dayjs } from "dayjs";

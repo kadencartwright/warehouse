@@ -1,5 +1,5 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
-import { SessionService } from "src/session/session.service";
+import { SessionService } from "../session/session.service";
 import { AuthService } from "./auth.service";
 import { LoginInput } from "./dto/login.input";
 import { AuthPayload } from "./entities/authPayload.entity";

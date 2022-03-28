@@ -1,6 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { hashSync } from "bcrypt";
 import { CryptoService } from "./crypto.service";
+import "reflect-metadata";
 
 describe("CryptoService", () => {
   let service: CryptoService;
