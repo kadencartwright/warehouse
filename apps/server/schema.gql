@@ -2,6 +2,53 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type GearRecordPhoto {
+  """the id of the photo"""
+  id: ID!
+
+  """the gear record that this photo is related to"""
+  gearRecord: GearRecord!
+
+  """the filename from the image POST handler"""
+  fileName: String!
+
+  """the date the file was uploaded"""
+  uploadedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type GearRecord {
+  """Example field (placeholder)"""
+  id: ID!
+
+  """the name of the piece of gear"""
+  name: String!
+
+  """the MSRP of the piece of gear"""
+  msrp: String
+
+  """the actual cost of the piece of gear"""
+  actualCost: String
+
+  """the date the piece of gear was acquired"""
+  acquiredOn: DateTime
+
+  """the serial number of the piece of gear"""
+  serialNumber: String
+
+  """the serial number of the piece of gear"""
+  modelNumber: String
+
+  """the manufacturer of the piece of gear"""
+  manufacturer: String
+  user: User!
+  photos: [GearRecordPhoto!]!
+}
+
 type User {
   id: ID!
 
@@ -25,6 +72,10 @@ type AuthPayload {
 type Query {
   users: [User!]!
   user(email: String!): User!
+  gearRecords: [GearRecord!]!
+  gearRecord(id: Int!): GearRecord!
+  gearRecordPhotos: [GearRecordPhoto!]!
+  gearRecordPhoto(id: Int!): GearRecordPhoto!
 }
 
 type Mutation {
@@ -32,6 +83,12 @@ type Mutation {
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(email: String!): User!
+  createGearRecord(createGearRecordInput: CreateGearRecordInput!): GearRecord!
+  updateGearRecord(updateGearRecordInput: UpdateGearRecordInput!): GearRecord!
+  removeGearRecord(id: Int!): GearRecord!
+  createGearRecordPhoto(createGearRecordPhotoInput: CreateGearRecordPhotoInput!): Boolean!
+  updateGearRecordPhoto(updateGearRecordPhotoInput: UpdateGearRecordPhotoInput!): GearRecordPhoto!
+  removeGearRecordPhoto(id: Int!): GearRecordPhoto!
 }
 
 input LoginInput {
@@ -82,5 +139,72 @@ input UpdateUserInput {
   the primary contact email of the user. This will also be the user's login username
   """
   email: String
+  id: Int!
+}
+
+input CreateGearRecordInput {
+  """the name of the piece of gear"""
+  name: String!
+
+  """the MSRP of the piece of gear"""
+  msrp: String!
+
+  """the actual cost of the piece of gear"""
+  actualCost: String!
+
+  """the date the piece of gear was acquired"""
+  acquiredOn: DateTime!
+
+  """the serial number of the piece of gear"""
+  serialNumber: String!
+
+  """the serial number of the piece of gear"""
+  modelNumber: String!
+
+  """the manufacturer of the piece of gear"""
+  manufacturer: String!
+}
+
+input UpdateGearRecordInput {
+  """the name of the piece of gear"""
+  name: String!
+
+  """the MSRP of the piece of gear"""
+  msrp: String!
+
+  """the actual cost of the piece of gear"""
+  actualCost: String!
+
+  """the date the piece of gear was acquired"""
+  acquiredOn: DateTime!
+
+  """the serial number of the piece of gear"""
+  serialNumber: String!
+
+  """the serial number of the piece of gear"""
+  modelNumber: String!
+
+  """the manufacturer of the piece of gear"""
+  manufacturer: String!
+  id: Int!
+}
+
+input CreateGearRecordPhotoInput {
+  """The Gear Record to associate the photo with"""
+  gearRecordId: ID!
+
+  """The photo  to asociate with a gear record"""
+  photo: Upload!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input UpdateGearRecordPhotoInput {
+  """The Gear Record to associate the photo with"""
+  gearRecordId: ID
+
+  """The photo  to asociate with a gear record"""
+  photo: Upload
   id: Int!
 }
