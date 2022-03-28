@@ -8,6 +8,7 @@ import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { DatabaseModule } from "./database/database.module";
 import { ConfigModule } from "@nestjs/config";
 import { CryptoModule } from "./crypto/crypto.module";
+import { SessionModule } from './session/session.module';
 import configuration from "./config/configuration";
 
 @Module({
@@ -25,6 +26,7 @@ import configuration from "./config/configuration";
     }),
     DatabaseModule,
     CryptoModule,
+    SessionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

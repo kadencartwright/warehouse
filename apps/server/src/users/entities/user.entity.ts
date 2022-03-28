@@ -1,5 +1,6 @@
 import { ObjectType, Field, ID } from "@nestjs/graphql";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Session } from "src/auth/entities/session.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @ObjectType()
 @Entity("users")
@@ -24,4 +25,8 @@ export class User {
       "the primary contact email of the user. This will also be the user's login username",
   })
   email: string;
+  @OneToMany((type) => Session, (session) => session.user, {
+    cascade: ["remove"],
+  })
+  sessions: Session[];
 }

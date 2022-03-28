@@ -1,8 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import { HttpException, Injectable } from "@nestjs/common";
 import { UsersService } from "../users/users.service";
 
 import { User } from "../users/entities/user.entity";
 import { CryptoService } from "../crypto/crypto.service";
+import { LoginInput } from "./dto/login.input";
 @Injectable()
 export class AuthService {
   constructor(
@@ -10,22 +11,20 @@ export class AuthService {
     private cryptoService: CryptoService
   ) {}
 
-  async validateUser(
-    email: string,
-    password: string
-  ): Promise<Omit<User, "passwordHash">> {
+  async authenticateUser({ email, password }: LoginInput): Promise<User> {
     const user = await this.usersService.findOne(email);
     /**
      * if the user exists, and the password is correct, we'll return their info
      * else return null
      */
     if (
-      user &&
-      (await this.cryptoService.comparePassword(password, user.passwordHash))
+      !(
+        user &&
+        (await this.cryptoService.comparePassword(password, user.passwordHash))
+      )
     ) {
-      const { passwordHash, ...result } = user;
-      return result;
+      return user;
     }
-    return null;
+    throw new HttpException("Unauthorized", 401);
   }
 }

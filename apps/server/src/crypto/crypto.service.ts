@@ -11,4 +11,12 @@ export class CryptoService {
   async hashPassword(plaintext: string): Promise<string> {
     return await hash(plaintext, 10);
   }
+  generateSessionCookie(): string {
+    //generate a random string value
+    return `${(Math.random() + 1).toString(36).substring(2)}${(
+      Math.random() + 1
+    )
+      .toString(36)
+      .substring(2)}`;
+  }
 }
