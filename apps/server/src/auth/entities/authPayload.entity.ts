@@ -1,11 +1,10 @@
-import { ObjectType, Field, ID } from "@nestjs/graphql";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { ObjectType, Field } from "@nestjs/graphql";
 
 @ObjectType()
 export class AuthPayload {
   @Field(() => String, {
     description:
-      "the cookie to be used when accessing private resources on the server",
+      "the token to be used when accessing private resources on the server",
   })
-  cookie: string;
+  token: string;
 }

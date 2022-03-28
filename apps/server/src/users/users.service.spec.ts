@@ -4,7 +4,7 @@ import { CryptoModule } from "../crypto/crypto.module";
 import { userProviders } from "./user.providers";
 import { UsersService } from "./users.service";
 import { ConfigModule } from "@nestjs/config";
-import configuration from "../config/configuration";
+import configuration from "../common/configuration";
 import "reflect-metadata";
 describe("UsersService", () => {
   let service: UsersService;

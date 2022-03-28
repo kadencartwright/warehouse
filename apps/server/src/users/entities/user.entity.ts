@@ -1,5 +1,4 @@
 import { ObjectType, Field, ID } from "@nestjs/graphql";
-import { Session } from "../../session/entities/session.entity";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @ObjectType()
@@ -26,6 +25,4 @@ export class User {
       "the primary contact email of the user. This will also be the user's login username",
   })
   email: string;
-
-  sessions: Session[];
 }

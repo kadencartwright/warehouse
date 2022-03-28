@@ -8,8 +8,9 @@ import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { DatabaseModule } from "./database/database.module";
 import { ConfigModule } from "@nestjs/config";
 import { CryptoModule } from "./crypto/crypto.module";
-import { SessionModule } from './session/session.module';
-import configuration from "./config/configuration";
+import { JwtService } from "./jwt/jwt.service";
+import { JwtModule } from "./jwt/jwt.module";
+import configuration from "./common/configuration";
 
 @Module({
   imports: [
@@ -26,9 +27,9 @@ import configuration from "./config/configuration";
     }),
     DatabaseModule,
     CryptoModule,
-    SessionModule,
+    JwtModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, JwtService],
 })
 export class AppModule {}

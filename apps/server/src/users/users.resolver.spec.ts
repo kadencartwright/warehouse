@@ -5,7 +5,7 @@ import { userProviders } from "./user.providers";
 import { UsersResolver } from "./users.resolver";
 import { UsersService } from "./users.service";
 import { ConfigModule, ConfigService } from "@nestjs/config";
-import configuration from "../config/configuration";
+import configuration from "../common/configuration";
 import "reflect-metadata";
 describe("UsersResolver", () => {
   let resolver: UsersResolver;

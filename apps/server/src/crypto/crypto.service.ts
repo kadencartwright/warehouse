@@ -1,6 +1,5 @@
 import { Injectable } from "@nestjs/common";
 import { compare, hash } from "bcrypt";
-
 @Injectable()
 export class CryptoService {
   /** basic wrapper around bcrypt compare */
@@ -10,13 +9,5 @@ export class CryptoService {
   /** basic wrapper around bcrypt hash, with app wid */
   async hashPassword(plaintext: string): Promise<string> {
     return await hash(plaintext, 10);
-  }
-  generateSessionCookie(): string {
-    //generate a random string value
-    return `${(Math.random() + 1).toString(36).substring(2)}${(
-      Math.random() + 1
-    )
-      .toString(36)
-      .substring(2)}`;
   }
 }

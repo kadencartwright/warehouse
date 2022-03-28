@@ -7,6 +7,7 @@ export type Configuration = {
     name: string;
     password: string;
   };
+  jwt: { secret: string };
 };
 export default () => {
   return {
@@ -17,6 +18,9 @@ export default () => {
       user: process.env.DATABASE_USER,
       name: process.env.DATABASE_NAME,
       password: process.env.DATABASE_PASSWORD,
+    },
+    jwt: {
+      secret: "6dKLBgNwnIDfmZaak",
     },
   };
 };

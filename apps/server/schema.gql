@@ -18,8 +18,8 @@ type User {
 }
 
 type AuthPayload {
-  """the cookie to be used when accessing private resources on the server"""
-  cookie: String!
+  """the token to be used when accessing private resources on the server"""
+  token: String!
 }
 
 type Query {
@@ -28,7 +28,7 @@ type Query {
 }
 
 type Mutation {
-  login(createUserInput: LoginInput!): AuthPayload!
+  login(loginInput: LoginInput!): AuthPayload!
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(email: String!): User!

@@ -4,7 +4,7 @@ import { DatabaseModule } from "../database/database.module";
 import { CryptoModule } from "../crypto/crypto.module";
 import { UsersModule } from "../users/users.module";
 import { AuthService } from "./auth.service";
-import configuration from "../config/configuration";
+import configuration from "../common/configuration";
 import { ConfigModule } from "@nestjs/config";
 
 describe("AuthService", () => {

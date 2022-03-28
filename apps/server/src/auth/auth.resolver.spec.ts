@@ -1,10 +1,9 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { AuthResolver } from "./auth.resolver";
 import { AuthService } from "./auth.service";
-import { SessionModule } from "../session/session.module";
 import { UsersModule } from "../users/users.module";
 import { CryptoModule } from "../crypto/crypto.module";
-import configuration from "../config/configuration";
+import configuration from "../common/configuration";
 import { ConfigModule } from "@nestjs/config";
 
 describe("AuthResolver", () => {
@@ -14,7 +13,6 @@ describe("AuthResolver", () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [AuthResolver, AuthService],
       imports: [
-        SessionModule,
         UsersModule,
         CryptoModule,
         ConfigModule.forRoot({

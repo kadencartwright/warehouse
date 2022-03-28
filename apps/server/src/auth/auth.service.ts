@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { UsersService } from "../users/users.service";
 
 import { User } from "../users/entities/user.entity";
@@ -18,13 +18,11 @@ export class AuthService {
      * else return null
      */
     if (
-      !(
-        user &&
-        (await this.cryptoService.comparePassword(password, user.passwordHash))
-      )
+      user &&
+      (await this.cryptoService.comparePassword(password, user.passwordHash))
     ) {
       return user;
     }
-    throw new HttpException("Unauthorized", 401);
+    throw new UnauthorizedException();
   }
 }
