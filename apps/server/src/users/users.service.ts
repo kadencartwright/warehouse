@@ -14,6 +14,7 @@ export class UsersService {
     private cryptoService: CryptoService
   ) {}
   async create(createUserInput: CreateUserInput) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, passwordConfirmation, ...rest } = createUserInput;
     const passwordHash = await this.cryptoService.hashPassword(password);
     const user = this.userRepository.create({
@@ -22,7 +23,6 @@ export class UsersService {
     });
     return await this.userRepository.save(user);
   }
-
   async findAll() {
     return this.userRepository.find();
   }

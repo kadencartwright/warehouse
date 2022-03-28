@@ -5,8 +5,10 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+import { GearRecordPhoto } from "../../gear-record-photos/entities/gear-record-photo.entity";
 
 @ObjectType()
 @Entity("gear_records")
@@ -20,36 +22,53 @@ export class GearRecord {
   name: string;
 
   @Column()
-  @Field(() => String, { description: "the MSRP of the piece of gear" })
-  msrp: string;
+  @Field(() => String, {
+    description: "the MSRP of the piece of gear",
+    nullable: true,
+  })
+  msrp?: string;
 
   @Column()
-  @Field(() => String, { description: "the actual cost of the piece of gear" })
-  actualCost: string;
+  @Field(() => String, {
+    description: "the actual cost of the piece of gear",
+    nullable: true,
+  })
+  actualCost?: string;
 
   @Column()
-  @Field(() => Date, { description: "the date the piece of gear was acquired" })
-  acquiredOn: Date;
+  @Field(() => Date, {
+    description: "the date the piece of gear was acquired",
+    nullable: true,
+  })
+  acquiredOn?: Date;
 
   @Column()
   @Field(() => String, {
     description: "the serial number of the piece of gear",
+    nullable: true,
   })
-  serialNumber: string;
+  serialNumber?: string;
 
   @Column()
   @Field(() => String, {
     description: "the serial number of the piece of gear",
+    nullable: true,
   })
-  modelNumber: string;
+  modelNumber?: string;
 
   @Column()
   @Field(() => String, {
     description: "the manufacturer of the piece of gear",
+    nullable: true,
   })
-  manufacturer: string;
+  manufacturer?: string;
 
+  @Field(() => User)
   @JoinColumn({ name: "user_id" })
   @ManyToOne(() => User, (user) => user.gearRecords)
   user: User;
+
+  @Field(() => [GearRecordPhoto])
+  @OneToMany(() => GearRecordPhoto, (photo) => photo.gearRecord)
+  photos: GearRecordPhoto[];
 }
