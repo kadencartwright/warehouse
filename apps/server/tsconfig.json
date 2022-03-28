@@ -17,5 +17,6 @@
     "noFallthroughCasesInSwitch": false,
     "composite": true
   },
+  "exclude": ["./dist"],
   "extends": "../../packages/tsconfig/base.json"
 }

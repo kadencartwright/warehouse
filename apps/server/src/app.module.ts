@@ -5,9 +5,9 @@ import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
 import { UsersModule } from "./users/users.module";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
-import { TypeOrmModule } from "@nestjs/typeorm";
 import { DatabaseModule } from "./database/database.module";
 import { ConfigModule } from "@nestjs/config";
+import { CryptoModule } from "./crypto/crypto.module";
 import configuration from "./config/configuration";
 
 @Module({
@@ -16,8 +16,6 @@ import configuration from "./config/configuration";
     UsersModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      debug: false,
-      playground: false,
       autoSchemaFile: "schema.gql",
     }),
     ConfigModule.forRoot({
@@ -26,6 +24,7 @@ import configuration from "./config/configuration";
       load: [configuration],
     }),
     DatabaseModule,
+    CryptoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

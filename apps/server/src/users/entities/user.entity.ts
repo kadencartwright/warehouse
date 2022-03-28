@@ -1,21 +1,24 @@
 import { ObjectType, Field, ID } from "@nestjs/graphql";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @ObjectType()
+@Entity("users")
 export class User {
+  @PrimaryGeneratedColumn()
   @Field(() => ID)
-  id: string;
+  id: number;
+  @Column()
   @Field(() => String, { description: "the first name of the user" })
   firstName: string;
 
+  @Column()
   @Field(() => String, { description: "the last name of the user" })
   lastName: string;
 
-  @Field(() => String, {
-    description:
-      "the password for the user. Must be 12-64 characters, include at least 1 number, and at least 1 special character",
-  })
+  @Column()
   passwordHash: string;
 
+  @Column()
   @Field(() => String, {
     description:
       "the primary contact email of the user. This will also be the user's login username",

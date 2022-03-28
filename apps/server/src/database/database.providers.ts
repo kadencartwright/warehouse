@@ -1,6 +1,6 @@
 import { ConfigService } from "@nestjs/config";
-import { Configuration } from "src/config/configuration";
-import { DATABASE_CONNECTION } from "src/constants";
+import { join } from "path";
+import { DATABASE_CONNECTION } from "../constants";
 import { createConnection } from "typeorm";
 
 export const DatabaseProviders = [
@@ -14,7 +14,8 @@ export const DatabaseProviders = [
         username: configService.get<string>("database.user"),
         password: configService.get<string>("database.password"),
         database: configService.get<string>("database.name"),
-        entities: [__dirname + "/../**/*.entity{.ts,.js}"],
+        entities: [join(__dirname, "../", "**", "*.entity.{ts,js}")],
+        synchronize: true,
       });
     },
     inject: [ConfigService],
