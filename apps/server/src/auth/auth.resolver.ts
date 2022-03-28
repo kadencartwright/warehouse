@@ -1,5 +1,5 @@
 import { Args, Mutation, Resolver } from "@nestjs/graphql";
-import { JwtService } from "src/jwt/jwt.service";
+import { JwtService } from "../jwt/jwt.service";
 import { AuthService } from "./auth.service";
 import { LoginInput } from "./dto/login.input";
 import { AuthPayload } from "./entities/authPayload.entity";

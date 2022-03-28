@@ -5,6 +5,7 @@ import { UsersModule } from "../users/users.module";
 import { CryptoModule } from "../crypto/crypto.module";
 import configuration from "../common/configuration";
 import { ConfigModule } from "@nestjs/config";
+import { JwtModule } from "../jwt/jwt.module";
 
 describe("AuthResolver", () => {
   let resolver: AuthResolver;
@@ -15,6 +16,7 @@ describe("AuthResolver", () => {
       imports: [
         UsersModule,
         CryptoModule,
+        JwtModule,
         ConfigModule.forRoot({
           isGlobal: true,
           envFilePath: ["development.env"],
