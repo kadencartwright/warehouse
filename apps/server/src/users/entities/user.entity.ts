@@ -1,5 +1,6 @@
 import { ObjectType, Field, ID } from "@nestjs/graphql";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { GearRecord } from "../../gear-records/entities/gear-record.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @ObjectType()
 @Entity("users")
@@ -25,4 +26,7 @@ export class User {
       "the primary contact email of the user. This will also be the user's login username",
   })
   email: string;
+
+  @OneToMany(() => GearRecord, (gearRecord) => gearRecord.user)
+  gearRecords: GearRecord[];
 }
