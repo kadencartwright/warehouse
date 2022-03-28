@@ -13,11 +13,6 @@ export class Session {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  @JoinColumn()
-  @ManyToOne((type) => User, (user) => user.id)
-  user: User;
-
   @Column({ default: "NOW()" })
   createdAt: Date;
 
@@ -26,4 +21,8 @@ export class Session {
 
   @Column()
   expiresAt: Date;
+
+  @ManyToOne(() => User, (user) => user.id, { cascade: true })
+  @JoinColumn({ name: "user_id" })
+  user: User;
 }

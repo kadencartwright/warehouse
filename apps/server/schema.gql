@@ -17,15 +17,29 @@ type User {
   email: String!
 }
 
+type AuthPayload {
+  """the cookie to be used when accessing private resources on the server"""
+  cookie: String!
+}
+
 type Query {
   users: [User!]!
   user(email: String!): User!
 }
 
 type Mutation {
+  login(createUserInput: LoginInput!): AuthPayload!
   createUser(createUserInput: CreateUserInput!): User!
   updateUser(updateUserInput: UpdateUserInput!): User!
   removeUser(email: String!): User!
+}
+
+input LoginInput {
+  """the users login email"""
+  email: String!
+
+  """the users login password"""
+  password: String!
 }
 
 input CreateUserInput {
