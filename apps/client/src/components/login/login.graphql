@@ -1,0 +1,6 @@
+# the login mutation for our graphql api
+mutation Login($loginInput: LoginInput!) {
+  login(loginInput: $loginInput) {
+    token
+  }
+}

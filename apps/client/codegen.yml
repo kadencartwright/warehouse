@@ -1,0 +1,13 @@
+overwrite: true
+schema: "../server/schema.gql"
+documents: "./**/*.graphql"
+generates:
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-query"
+    config:
+      fetcher:
+        endpoint: "https://127.0.0.1:3500/graphql"
+      namingConvention: keep
