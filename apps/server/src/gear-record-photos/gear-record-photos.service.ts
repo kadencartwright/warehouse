@@ -1,5 +1,5 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { createWriteStream } from "fs";
+import { FileSystemService } from "src/file-system/file-system.service";
 import { Repository } from "typeorm";
 import { GEAR_RECORD_PHOTO_REPOSITORY } from "../constants";
 import { CreateGearRecordPhotoInput } from "./dto/create-gear-record-photo.input";
@@ -10,32 +10,22 @@ import { GearRecordPhoto } from "./entities/gear-record-photo.entity";
 export class GearRecordPhotosService {
   constructor(
     @Inject(GEAR_RECORD_PHOTO_REPOSITORY)
-    private readonly gearRecordPhotoRepository: Repository<GearRecordPhoto>
+    private readonly gearRecordPhotoRepository: Repository<GearRecordPhoto>,
+    @Inject(FileSystemService)
+    private readonly fileSystemService: FileSystemService
   ) {}
 
   async create(createGearRecordPhotoInput: CreateGearRecordPhotoInput) {
-    const { createReadStream } = createGearRecordPhotoInput.photo;
-    const filename = `${createGearRecordPhotoInput.gearRecordId}-${(
-      Math.random() + 1
-    )
-      .toString(36)
-      .substring(2)}`;
-    const uploadIsSuccessful = await new Promise(async (resolve, reject) =>
-      createReadStream()
-        .pipe(createWriteStream(`./uploads/${filename}`))
-        .on("finish", () => resolve(true))
-        .on("error", () => reject(false))
+    const result = await this.fileSystemService.upload(
+      createGearRecordPhotoInput.photo.createReadStream()
     );
-
-    if (uploadIsSuccessful) {
+    if (result.success) {
       this.gearRecordPhotoRepository.create({
-        fileName: filename,
+        fileName: result.fileName,
         gearRecord: { id: createGearRecordPhotoInput.gearRecordId },
       });
-      return true;
-    } else {
-      return false;
     }
+    return result.success;
   }
 
   async findAll() {

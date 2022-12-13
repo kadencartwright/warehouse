@@ -11,7 +11,8 @@ import { CryptoModule } from "./crypto/crypto.module";
 import { JwtService } from "./jwt/jwt.service";
 import { JwtModule } from "./jwt/jwt.module";
 import { GearRecordsModule } from "./gear-records/gear-records.module";
-import { GearRecordPhotosModule } from './gear-record-photos/gear-record-photos.module';
+import { GearRecordPhotosModule } from "./gear-record-photos/gear-record-photos.module";
+import { FileSystemModule } from "./file-system/file-system.module";
 import configuration from "./common/configuration";
 
 @Module({
@@ -32,6 +33,7 @@ import configuration from "./common/configuration";
     JwtModule,
     GearRecordsModule,
     GearRecordPhotosModule,
+    FileSystemModule,
   ],
   controllers: [AppController],
   providers: [AppService, JwtService],
